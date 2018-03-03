@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+
 import './App.css';
+
 import axios from 'axios';
+
+import Button from 'material-ui/Button';
+import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      file: null
-    }
+      json: null
+    };
+
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -16,23 +23,11 @@ class App extends Component {
   onFormSubmit(e) {
     e.preventDefault();
 
-    const file = this.state.file;
-
-    /* fetch("https://yazlab2proje1-server.herokuapp.com/getReducedData", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(file)
-    })
-    .then(res => res.json())
-    .then(res => {
-      console.log("res: ", res);
-    }); */
+    // text şeklinde olan json veri json objesine dönüştürüldü
+    const json = JSON.parse(this.state.json);
 
     axios
-      .post('https://yazlab2proje1-server.herokuapp.com/getReducedData', file)
+      .post('https://yazlab2proje1-server.herokuapp.com/simplify', json)
       .then(res => {
         console.log("res:", res);
       })
@@ -42,20 +37,29 @@ class App extends Component {
   }
 
   onChange(e) {
+    e.preventDefault();
+
     this.setState({
-      file:e.target.files[0]
-    });
+      json: e.target.value
+    })
   }
 
   render() {
+
     return (
       <div>
-        
+        <h1 className="title">Send JSON Data to Server</h1>
 
-        <form onSubmit={this.onFormSubmit}>
-          <h1>File Upload</h1>
-          <input type="file" onChange={this.onChange} />
-          <button type="submit">Upload</button>
+        <form className="upload-form" onSubmit={this.onFormSubmit}>
+          <FormControl>
+            <FormLabel className="form-label">File Upload</FormLabel>
+            <FormGroup className="form-group">
+              <Button variant="raised" id="upload-button" type="submit">Upload</Button>
+            </FormGroup>
+            <FormGroup>
+              <textarea className="text-area" placeholder="JSON veriyi buraya yapıştırın." onChange={this.onChange} />
+            </FormGroup>
+          </FormControl>
         </form>
       </div>
     );
