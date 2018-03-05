@@ -11,13 +11,15 @@ import Button from 'material-ui/Button';
 import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
 import MyFancyComponent from "./MyFancyComponent";
 
+const url = "http://7d43cdef.ngrok.io/simplify";
+
 class App extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      json: null
+      coordinates: null
     };
 
     this.onFormSubmit = this.onFormSubmit.bind(this);
@@ -29,12 +31,14 @@ class App extends Component {
 
     // text şeklinde olan json veri json objesine dönüştürüldü
     const json = JSON.parse(this.state.json);
-    const url = 'http://6fc27ad9.ngrok.io/simplify';
 
     axios
       .post(url, json)
       .then(res => {
         console.log("res:", res);
+        this.setState({
+          coordinates: res.data
+        });
       })
       .catch(function (error) {
         console.log(error);
@@ -50,6 +54,19 @@ class App extends Component {
   }
 
   render() {
+
+    let fancyCompoent;
+    if(this.state.coordinates!== null){
+      fancyCompoent = (
+        <MyFancyComponent coordinates={this.state.coordinates}/>
+      )
+    }
+    else {
+      fancyCompoent = (
+        <MyFancyComponent />
+      )
+    }
+
     return (
       <div>
         <h1 className="title">Send JSON Data to Server</h1>
@@ -66,7 +83,7 @@ class App extends Component {
           </FormControl>
         </form>
 
-        <MyFancyComponent/>
+        {fancyCompoent}
       </div>
     );
   }

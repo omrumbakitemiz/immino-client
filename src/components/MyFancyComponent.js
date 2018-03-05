@@ -1,10 +1,8 @@
 /* eslint-disable no-undef */
 import React from "react";
 import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import DrawingManager from "react-google-maps/lib/components/drawing/DrawingManager";
-import { Polyline } from "react-google-maps";
-import { Rectangle } from "react-google-maps";
 
 const url = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD4E9oJs20gMki5uB3uRmp05v-gpCG7h0c";
 
@@ -19,12 +17,13 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) =>
   <GoogleMap
-    ref={(map) => {props.handleBoundsChange(map)}}
     defaultZoom={8}
+
     defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    // defaultCenter={{lat: props.coordinates[0].Latitude, lng: props.coordinates[0].Longitude}}
   >
-    <DrawingManager onRectangleComplete={props.handleRectangleComplete} onMarkerComplete={props.handleMarkerClick}
-      defaultDrawingMode={google.maps.drawing.OverlayType.MARKER}
+    <DrawingManager onRectangleComplete={props.handleRectangleComplete}
+      defaultDrawingMode={google.maps.drawing.OverlayType.RECTANGLE}
       defaultOptions={{
         drawingControl: true,
         drawingControlOptions: {
@@ -61,27 +60,23 @@ const MyMapComponent = compose(
 );
 
 class MyFancyComponent extends React.PureComponent {
-  state = {
-    isMarkerShown: false,
-  };
-
-  handleMarkerClick = () => {
-    console.log("marker clicked")
-  };
 
   handleRectangleComplete = (e) => {
-    console.log(e.bounds);
-  };
-
-  handleBoundsChange = (e) => {
-    console.log("fasfafas");
+    /*
+    e.bounds.b.b - e.bounds.b.f
+    e.bounds.f.b - e.bounds.f.f
+    */
+    console.log(e.bounds.b.b);
+    console.log(e.bounds.b.f);
+    console.log(e.bounds.f.b);
+    console.log(e.bounds.f.f);
   };
 
   render() {
+
     return (
       <MyMapComponent
-        handleBoundsChange = {this.handleBoundsChange}
-        handleMarkerClick={this.handleMarkerClick}
+        coordinates={this.props.coordinates}
         handleRectangleComplete={this.handleRectangleComplete}
       />
     )
