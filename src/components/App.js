@@ -10,8 +10,9 @@ import axios from 'axios';
 import Button from 'material-ui/Button';
 import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
 import MyFancyComponent from "./MyFancyComponent";
+import MyMap from "./Map/Map";
 
-const url = "http://7d43cdef.ngrok.io/simplify";
+const url = "http://4ef8c0db.ngrok.io/simplify";
 
 class App extends Component {
 
@@ -55,7 +56,7 @@ class App extends Component {
 
   render() {
 
-    let fancyCompoent;
+    /*let fancyCompoent;
     if(this.state.coordinates!== null){
       fancyCompoent = (
         <MyFancyComponent coordinates={this.state.coordinates}/>
@@ -65,7 +66,7 @@ class App extends Component {
       fancyCompoent = (
         <MyFancyComponent />
       )
-    }
+    }*/
 
     return (
       <div>
@@ -83,7 +84,8 @@ class App extends Component {
           </FormControl>
         </form>
 
-        {fancyCompoent}
+        {/*fancyCompoent*/}
+        <MyMap />
       </div>
     );
   }
