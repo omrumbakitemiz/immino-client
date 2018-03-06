@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 
-//eslint-disable-next-line
-//import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-
 import './App.css';
 
 import axios from 'axios';
 
-import Button from 'material-ui/Button';
 import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
-import MyFancyComponent from "./MyFancyComponent";
+import Button from 'material-ui/Button';
 import MyMap from "./Map/Map";
 
-const url = "http://4ef8c0db.ngrok.io/simplify";
+const url = "http://d8c7eb92.ngrok.io/simplify";
 
 class App extends Component {
 
@@ -20,9 +16,11 @@ class App extends Component {
     super(props);
 
     this.state = {
-      coordinates: null
+      coordinates: null,
+      showMap: false
     };
 
+    this.showMap = this.showMap.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -54,29 +52,22 @@ class App extends Component {
     })
   }
 
+  showMap() {
+    this.setState({
+      showMap: true
+    });
+  }
+
   render() {
-
-    /*let fancyCompoent;
-    if(this.state.coordinates!== null){
-      fancyCompoent = (
-        <MyFancyComponent coordinates={this.state.coordinates}/>
-      )
-    }
-    else {
-      fancyCompoent = (
-        <MyFancyComponent />
-      )
-    }*/
-
     return (
       <div>
-        <h1 className="title">Send JSON Data to Server</h1>
+        <h1 className="title">Send Data to Server</h1>
 
         <form className="upload-form" onSubmit={this.onFormSubmit}>
           <FormControl>
             <FormLabel className="form-label">File Upload</FormLabel>
             <FormGroup className="form-group">
-              <Button variant="raised" id="upload-button" type="submit">Upload</Button>
+              <Button onClick={this.showMap} variant="raised" id="upload-button" type="submit">Upload</Button>
             </FormGroup>
             <FormGroup>
               <textarea className="text-area" placeholder="JSON veriyi buraya yapıştırın." onChange={this.onChange} />
@@ -84,8 +75,7 @@ class App extends Component {
           </FormControl>
         </form>
 
-        {/*fancyCompoent*/}
-        <MyMap />
+        {this.state.showMap && this.state.coordinates && <MyMap />}
       </div>
     );
   }
