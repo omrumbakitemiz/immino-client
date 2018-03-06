@@ -8,7 +8,7 @@ import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
 import Button from 'material-ui/Button';
 import MyMap from "./Map/Map";
 
-const url = "http://d8c7eb92.ngrok.io/simplify";
+const url = "http://c631e3fb.ngrok.io/simplify";
 
 class App extends Component {
 
@@ -75,7 +75,7 @@ class App extends Component {
           </FormControl>
         </form>
 
-        {this.state.showMap && this.state.coordinates && <MyMap />}
+        {this.state.showMap && this.state.coordinates && <MyMap coordinates={this.state.coordinates}/>}
       </div>
     );
   }
