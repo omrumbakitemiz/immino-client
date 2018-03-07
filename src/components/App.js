@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 
-import './App.css';
-
 import axios from 'axios';
 
 import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
 import Button from 'material-ui/Button';
-import MyMap from "./Map/Map";
 
-const url = "http://c631e3fb.ngrok.io/simplify";
+// import Dropzone from 'react-dropzone'
+
+import MyMap from './Map/MyMap';
+import './App.css';
+
+// const url = 'http://49f12132.ngrok.io/simplify';
+const url = 'http://localhost:8080/simplify';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       coordinates: null,
-      showMap: false
+      showMap: false,
+      files: null,
     };
 
+    this.clearJsonData = this.clearJsonData.bind(this);
     this.showMap = this.showMap.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
@@ -33,13 +37,12 @@ class App extends Component {
 
     axios
       .post(url, json)
-      .then(res => {
-        console.log("res:", res);
+      .then((res) => {
         this.setState({
-          coordinates: res.data
+          coordinates: res.data,
         });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -48,15 +51,28 @@ class App extends Component {
     e.preventDefault();
 
     this.setState({
-      json: e.target.value
-    })
+      json: e.target.value,
+    });
   }
 
   showMap() {
     this.setState({
-      showMap: true
+      showMap: true,
     });
   }
+
+  clearJsonData() {
+    document.getElementById('textArea').value = null;
+    this.setState({
+      json: null
+    });
+  }
+
+  /* onDrop(files) {
+    this.setState({
+      files: files,
+    })
+  } */
 
   render() {
     return (
@@ -70,12 +86,19 @@ class App extends Component {
               <Button onClick={this.showMap} variant="raised" id="upload-button" type="submit">Upload</Button>
             </FormGroup>
             <FormGroup>
-              <textarea className="text-area" placeholder="JSON veriyi buraya yapıştırın." onChange={this.onChange} />
+              <textarea id="textArea" className="text-area form-group" placeholder="JSON veriyi buraya yapıştırın." onChange={this.onChange} />
+            </FormGroup>
+            <FormGroup className="form-group">
+              <Button onClick={this.clearJsonData} variant="raised">Clear Data</Button>
             </FormGroup>
           </FormControl>
         </form>
 
-        {this.state.showMap && this.state.coordinates && <MyMap coordinates={this.state.coordinates}/>}
+        {this.state.showMap && this.state.coordinates && <MyMap coordinates={this.state.coordinates} />}
+        
+        {/*<Dropzone onDrop={(files) => this.onDrop(files)}>
+          <div>Try dropping some files here, or click to select files to upload.</div>
+        </Dropzone>*/}
       </div>
     );
   }

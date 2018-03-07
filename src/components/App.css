@@ -2,7 +2,6 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 20px;
 }
 
 .title {
@@ -15,7 +14,7 @@ body {
 }
 
 .form-group {
-    margin: 20px;
+    margin: 15px;
 }
 
 .text-area {
