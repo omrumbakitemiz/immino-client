@@ -11,7 +11,8 @@ import MyMap from './Map/MyMap';
 import './App.css';
 
 // const url = 'http://49f12132.ngrok.io/simplify';
-const url = 'http://localhost:8080/simplify';
+// const url = 'http://localhost:8080/simplify';
+const url = 'https://yazlab2proje1-server.herokuapp.com/simplify';
 
 class App extends Component {
   constructor(props) {
