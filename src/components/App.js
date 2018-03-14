@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
+import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 
 // import Dropzone from 'react-dropzone'
@@ -10,9 +11,6 @@ import Button from 'material-ui/Button';
 import MyMap from './Map/MyMap';
 import './App.css';
 
-// const url = 'http://49f12132.ngrok.io/simplify';
-const url = 'http://localhost:8080/ramer?epsilon=8.0';
-// const url = 'https://yazlab2proje1-server.herokuapp.com/simplify';
 
 class App extends Component {
   constructor(props) {
@@ -35,6 +33,8 @@ class App extends Component {
 
     // text şeklinde olan json veri json objesine dönüştürüldü
     const json = JSON.parse(this.state.json);
+
+    const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.epsilon}`;
 
     axios
       .post(url, json)
@@ -69,6 +69,12 @@ class App extends Component {
     });
   }
 
+  handleEpsilonChange = name => event => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
   /* onDrop(files) {
     this.setState({
       files: files,
@@ -84,6 +90,10 @@ class App extends Component {
           <FormControl>
             <FormLabel className="form-label">File Upload</FormLabel>
             <FormGroup className="form-group">
+              {/* TODO: Epsilon değeri için değer kontrolü yapılmalı */}
+              <TextField onChange={this.handleEpsilonChange("epsilon")} id="epsilon" placeholder="Örnek: 8.0" label="Epsilon" type="search" style={{width: "100%"}} margin="normal" />
+            </FormGroup>
+            <FormGroup className="form-group">
               <Button onClick={this.showMap} variant="raised" id="upload-button" type="submit">Upload</Button>
             </FormGroup>
             <FormGroup>
@@ -95,7 +105,8 @@ class App extends Component {
           </FormControl>
         </form>
 
-        {this.state.showMap && this.state.coordinates && <MyMap coordinates={this.state.coordinates} />}
+        {this.state.showMap && this.state.coordinates && this.state.epsilon &&
+        <MyMap coordinates={this.state.coordinates} />}
 
         {/*<Dropzone onDrop={(files) => this.onDrop(files)}>
           <div>Try dropping some files here, or click to select files to upload.</div>
