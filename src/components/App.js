@@ -11,8 +11,8 @@ import MyMap from './Map/MyMap';
 import './App.css';
 
 // const url = 'http://49f12132.ngrok.io/simplify';
-// const url = 'http://localhost:8080/simplify';
-const url = 'https://yazlab2proje1-server.herokuapp.com/simplify';
+const url = 'http://localhost:8080/ramer?epsilon=8.0';
+// const url = 'https://yazlab2proje1-server.herokuapp.com/simplify';
 
 class App extends Component {
   constructor(props) {
@@ -96,7 +96,7 @@ class App extends Component {
         </form>
 
         {this.state.showMap && this.state.coordinates && <MyMap coordinates={this.state.coordinates} />}
-        
+
         {/*<Dropzone onDrop={(files) => this.onDrop(files)}>
           <div>Try dropping some files here, or click to select files to upload.</div>
         </Dropzone>*/}
