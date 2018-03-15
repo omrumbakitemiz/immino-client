@@ -8,6 +8,8 @@ import DrawingManager from "react-google-maps/lib/components/drawing/DrawingMana
 
 import Button from 'material-ui/Button';
 
+import './MyMap.css';
+
 const url = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD4E9oJs20gMki5uB3uRmp05v-gpCG7h0c";
 
 class MyMap extends PureComponent {
@@ -53,9 +55,7 @@ class MyMap extends PureComponent {
       <div>
         <GoogleMap
           defaultZoom={2}
-          // defaultCenter={{ lat: 39.984702, lng: 116.318417 }}
-          defaultCenter={{lat: this.props.coordinates[0].lat, lng: this.props.coordinates[0].lng}}
-        >
+          defaultCenter={{lat: this.props.coordinates[0].lat, lng: this.props.coordinates[0].lng}}>
           <DrawingManager
             onRectangleComplete={this.handleRectangleComplete}
             defaultDrawingMode={google.maps.drawing.OverlayType.RECTANGLE}
@@ -102,7 +102,8 @@ class MyMap extends PureComponent {
             options= {{
               strokeColor: '#FF0000',
               strokeOpacity: 1.0,
-              strokeWeight: 2
+              strokeWeight: 2,
+              geodesic: true
             }}
           />
         </GoogleMap>
@@ -114,9 +115,9 @@ class MyMap extends PureComponent {
 
 export default compose(withProps({
   googleMapURL: url,
-  loadingElement: <div style={{ height: `100%` }} />,
-  containerElement: <div style={{ height: `400px` }} />,
-  mapElement: <div style={{ height: `100%` }} />,
+  loadingElement: <div style={{ height: `600px`, width: `600px` }} />,
+  containerElement: <div style={{ height: `600px`, width: `600px` }} />,
+  mapElement: <div style={{ height: `600px`, margin: 20 }} />,
 }),
   withScriptjs,
   withGoogleMap)(MyMap);

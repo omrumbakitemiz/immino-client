@@ -2,6 +2,11 @@
     display: flex;
     justify-content: center;
     flex-direction: row;
+    min-width: 300px;
+}
+
+.form-control {
+    min-width: 300px !important;
 }
 
 .title {
@@ -13,8 +18,15 @@ body {
     padding: 10px;
 }
 
+.form-group-slider {
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
 .form-group {
-    margin: 15px;
+    margin: 20px;
 }
 
 .text-area {
@@ -24,4 +36,29 @@ body {
 
 .form-label {
     text-align: center;
+}
+
+.value {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.maps-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.map1 {
+    width: 300px !important;  /* Or whatever */
+    height: 300px; /* Or whatever */
+    margin: auto;  /* Magic! */
+}
+
+.map2 {
+    width: 300px !important;  /* Or whatever */
+    height: 300px; /* Or whatever */
+    margin: auto;  /* Magic! */
 }
