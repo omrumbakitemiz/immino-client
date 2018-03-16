@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import { FormLabel, FormControl, FormGroup, FormControlLabel } from 'material-ui/Form';
+import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
 import Button from 'material-ui/Button';
-import Switch from 'material-ui/Switch';
 
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
@@ -22,13 +21,17 @@ class App extends Component {
       showMap: false,
       responseHeaders: null,
       sliderValue: 8,
-      uploadPressed: false
+      uploadPressed: false,
+      textAreaHide: false,
+      json: ""
     };
 
     this.clearJsonData = this.clearJsonData.bind(this);
     this.showMap = this.showMap.bind(this);
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.toggleTextArea = this.toggleTextArea.bind(this);
+    this.handleReset = this.handleReset.bind(this);
   }
 
   onFormSubmit(e) {
@@ -37,7 +40,7 @@ class App extends Component {
     // text şeklinde olan json veri json objesine dönüştürüldü
     const json = JSON.parse(this.state.json);
 
-    const url = `http://localhost:8080/ramer?epsilon=${this.state.sliderValue}`;
+    const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
 
     this.setState({
       coordinates: json,
@@ -45,6 +48,8 @@ class App extends Component {
     });
 
     this.makeRequest(url, json);
+
+    this.toggleTextArea();
   }
 
   onChange(e) {
@@ -63,14 +68,14 @@ class App extends Component {
   }
 
   clearJsonData() {
-    document.getElementById('textArea').value = null;
+    document.getElementById('text-area').value = null;
     this.setState({
       json: null
     });
   }
 
   handleSliderChange = value => {
-    const url = `http://localhost:8080/ramer?epsilon=${this.state.sliderValue}`;
+    const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
     const { uploadPressed, coordinates } = this.state;
 
     if(uploadPressed) {
@@ -99,13 +104,23 @@ class App extends Component {
   }
 
   toggleTextArea() {
-    document.getElementById('textArea').hidden = !document.getElementById('textArea').hidden;
+    this.setState({
+      textAreaHide: true
+    });
+  }
+
+  // => 'dan sonra () kullanılmazsa return kullanılmalı.
+  handleReset() {
+    this.setState({
+      textAreaHide: false,
+      showMap: false
+    });
   }
 
   render() {
     let mapShowCondition = this.state.showMap && this.state.reducedCoordinates && this.state.sliderValue;
 
-    const { sliderValue } = this.state;
+    const { sliderValue, textAreaHide, json } = this.state;
 
     return (
       <div>
@@ -118,17 +133,24 @@ class App extends Component {
               {/* TODO: Epsilon değeri için değer kontrolü yapılmalı */}
               <InputRange maxValue={35} minValue={1} value={sliderValue} onChange={this.handleSliderChange} />
             </FormGroup>
-            <FormGroup className="form-group">
-              <Button onClick={this.showMap} variant="raised" id="upload-button" type="submit">Upload</Button>
-              <FormControlLabel control={<Switch onChange={this.toggleTextArea} />} label="Gizle" />
-            </FormGroup>
-            <FormGroup>
-              <textarea id="textArea" className="text-area form-group" placeholder="JSON veriyi buraya yapıştırın."
-               onChange={this.onChange} />
-            </FormGroup>
-            <FormGroup className="form-group">
-              <Button onClick={this.clearJsonData} variant="raised">Clear Data</Button>
-            </FormGroup>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+              <FormGroup className="form-group">
+                <Button onClick={this.showMap} variant="raised" color="primary" id="upload-button" type="submit">Upload</Button>
+              </FormGroup>
+              <FormGroup className="form-group">
+                <Button onClick={this.handleReset} variant="raised" color="secondary">Clear</Button>
+              </FormGroup>
+            </div>
+            {!textAreaHide &&
+            <div>
+              <FormGroup>
+                <textarea id="text-area" className="text-area form-group" placeholder="JSON veriyi buraya yapıştırın."
+                onChange={this.onChange} value={json} />
+              </FormGroup>
+              <FormGroup id="clear-data" className="form-group">
+                <Button onClick={this.clearJsonData} variant="raised">Clear Data</Button>
+              </FormGroup>
+            </div>}
           </FormControl>
         </form>
 

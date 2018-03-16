@@ -102,12 +102,14 @@ class MyMap extends PureComponent {
             options= {{
               strokeColor: '#FF0000',
               strokeOpacity: 1.0,
-              strokeWeight: 2,
+              strokeWeight: 1.5,
               geodesic: true
             }}
           />
         </GoogleMap>
-        <Button variant="raised" onClick={this.handleDeleteRectangle}>Clear Map</Button>
+        <div style={{display: "flex", justifyContent: "center"}}>
+          <Button style={{marginLeft: 20}} variant="raised" color="green" onClick={this.handleDeleteRectangle}>Clear Map</Button>
+        </div>
       </div>
     )
   }
@@ -115,9 +117,9 @@ class MyMap extends PureComponent {
 
 export default compose(withProps({
   googleMapURL: url,
-  loadingElement: <div style={{ height: `600px`, width: `600px` }} />,
-  containerElement: <div style={{ height: `600px`, width: `600px` }} />,
-  mapElement: <div style={{ height: `600px`, margin: 20 }} />,
+  loadingElement: <div style={{ height: `500px`, width: `700px` }} />,
+  containerElement: <div style={{ height: `500px`, width: `700px` }} />,
+  mapElement: <div style={{ height: `500px`, margin: 10 }} />,
 }),
   withScriptjs,
   withGoogleMap)(MyMap);
