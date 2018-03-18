@@ -14,10 +14,6 @@
     justify-content: center;
 }
 
-body {
-    padding: 10px;
-}
-
 .form-group-slider {
     margin-top: 40px;
     margin-left: 20px;
@@ -61,4 +57,13 @@ body {
     width: 300px !important;  /* Or whatever */
     height: 300px; /* Or whatever */
     margin: auto;  /* Magic! */
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 75px;
+    margin-left: 50px;
+    width: 50%;
 }

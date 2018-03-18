@@ -15,7 +15,8 @@ const url = "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,
 class MyMap extends PureComponent {
 
   state = {
-    bounds: new google.maps.LatLngBounds()
+    bounds: new google.maps.LatLngBounds(),
+    rectangleBounds: null
   }
 
   handleRectangleComplete = rectangle => {
@@ -29,18 +30,20 @@ class MyMap extends PureComponent {
 
       rectangleBounds: {
         nw: {
-          ltd: bounds.f.f,
+          lat: bounds.f.f,
           lng: bounds.b.b
         },
         se: {
-          ltd: bounds.f.b,
+          lat: bounds.f.b,
           lng: bounds.b.f
         }
       }
     });
 
-    console.log(`KB (ltd - lng): ${bounds.f.f}, ${bounds.b.b}`);
-    console.log(`GD (ltd - lng): ${bounds.f.b}, ${bounds.b.f}`);
+    console.log(`KB (lat - lng): ${bounds.f.f}, ${bounds.b.b}`);
+    console.log(`GD (lat - lng): ${bounds.f.b}, ${bounds.b.f}`);
+
+    this.props.searchRectangle(this.state.rectangleBounds);
   };
 
   handleDeleteRectangle = e => {
@@ -108,7 +111,7 @@ class MyMap extends PureComponent {
           />
         </GoogleMap>
         <div style={{display: "flex", justifyContent: "center"}}>
-          <Button style={{marginLeft: 20}} variant="raised" color="green" onClick={this.handleDeleteRectangle}>Clear Map</Button>
+          <Button style={{marginLeft: 20}} variant="raised" color="default" onClick={this.handleDeleteRectangle}>Clear Map</Button>
         </div>
       </div>
     )
@@ -117,9 +120,9 @@ class MyMap extends PureComponent {
 
 export default compose(withProps({
   googleMapURL: url,
-  loadingElement: <div style={{ height: `500px`, width: `700px` }} />,
-  containerElement: <div style={{ height: `500px`, width: `700px` }} />,
-  mapElement: <div style={{ height: `500px`, margin: 10 }} />,
+  loadingElement: <div style={{ height: `350px`, width: `700px` }} />,
+  containerElement: <div style={{ height: `350px`, width: `700px` }} />,
+  mapElement: <div style={{ height: `350px`, margin: 10 }} />,
 }),
   withScriptjs,
   withGoogleMap)(MyMap);

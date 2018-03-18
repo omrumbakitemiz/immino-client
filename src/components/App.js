@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { FormLabel, FormControl, FormGroup } from 'material-ui/Form';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Button from 'material-ui/Button';
 
 import InputRange from 'react-input-range';
@@ -23,7 +24,8 @@ class App extends Component {
       sliderValue: 8,
       uploadPressed: false,
       textAreaHide: false,
-      json: ""
+      json: "",
+      searchResults: null
     };
 
     this.clearJsonData = this.clearJsonData.bind(this);
@@ -32,6 +34,7 @@ class App extends Component {
     this.onChange = this.onChange.bind(this);
     this.toggleTextArea = this.toggleTextArea.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.searchRectangle = this.searchRectangle.bind(this);
   }
 
   onFormSubmit(e) {
@@ -40,7 +43,8 @@ class App extends Component {
     // text şeklinde olan json veri json objesine dönüştürüldü
     const json = JSON.parse(this.state.json);
 
-    const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
+    // const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
+    const url = `http://localhost:8080/ramer?epsilon=${this.state.sliderValue}`;
 
     this.setState({
       coordinates: json,
@@ -68,9 +72,9 @@ class App extends Component {
   }
 
   clearJsonData() {
-    document.getElementById('text-area').value = null;
     this.setState({
-      json: null
+      json: " ",
+      searchResults: null
     });
   }
 
@@ -109,12 +113,29 @@ class App extends Component {
     });
   }
 
-  // => 'dan sonra () kullanılmazsa return kullanılmalı.
   handleReset() {
     this.setState({
       textAreaHide: false,
       showMap: false
     });
+
+    this.clearJsonData();
+  }
+
+  searchRectangle(rectangleBounds) {
+    const { reducedCoordinates } = this.state;
+
+    const { nw, se } = rectangleBounds;
+    const url = `http://localhost:8080/search?nwLat=${nw.lat}&nwLng=${nw.lng}&seLat=${se.lat}&seLng=${se.lng}`;
+
+    axios
+      .post(url, reducedCoordinates)
+      .then((response) => {
+        this.setState({
+          searchResults: response.data
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
@@ -128,9 +149,8 @@ class App extends Component {
 
         <form className="upload-form" onSubmit={this.onFormSubmit}>
           <FormControl className="form-control">
-            <FormLabel className="form-label">Veri İndirge</FormLabel>
+            <FormLabel className="form-label">GPS Verisi İndirgeme</FormLabel>
             <FormGroup className="form-group-slider">
-              {/* TODO: Epsilon değeri için değer kontrolü yapılmalı */}
               <InputRange maxValue={35} minValue={1} value={sliderValue} onChange={this.handleSliderChange} />
             </FormGroup>
             <div style={{display: "flex", justifyContent: "space-between"}}>
@@ -155,9 +175,38 @@ class App extends Component {
         </form>
 
         <div className="maps-flex">
-          {mapShowCondition && <MyMap className="map1" coordinates={this.state.reducedCoordinates} />}
-          {mapShowCondition && <MyMap classNamr="map2" coordinates={this.state.coordinates} />}
+        {/*TODO: reducedCoordinates iki kez props olarak gönderilmiş*/}
+          {mapShowCondition && <MyMap searchRectangle={this.searchRectangle} reducedCoordinates={this.state.reducedCoordinates} className="map1" coordinates={this.state.reducedCoordinates} />}
+          {mapShowCondition && <MyMap reducedCoordinates={this.state.reducedCoordinates} classNamr="map2" coordinates={this.state.coordinates} />}
         </div>
+
+        {/*RectangleComplete fonksiyonu çalıştıktan sonra seçili alan
+        içinde kalan noktaların koordinatları gösterilecek.*/}
+
+        {this.state.searchResults &&
+          <div className="table">
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell style={{fontSize: 20, width: 150}}>Koordinatlar</TableCell>
+                <TableCell style={{fontSize: 20}}>Latitude</TableCell>
+                <TableCell style={{fontSize: 20}}>Longitude</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {this.state.searchResults.map((coordinate, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{coordinate.lat}</TableCell>
+                    <TableCell>{coordinate.lng}</TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
+        </div>
+        }
       </div>
     );
   }
