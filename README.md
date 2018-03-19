@@ -6,7 +6,9 @@
 
 Haraket eden nesnelerin gerçek zamanlı olarak konum bilgilerinin tespit edilmesi ve bu konumlar kullanılarak seyahat yollarının (trajectories) oluşturulması günümüz teknolojisinin getirmiş olduğu imkanlardan biridir. Bu bilgiler tek başına bir anlam ifade etmemekte olup sadace ham veri olarak kalmaktadır. Ancak bu veriler analiz edilerek bir çok yararlı bilgi elde edebiliriz. Seyahat verilerinden bilgi çıkarımı için bir takım ön işlemler (veri azaltma, filtreleme vs) yapılır. Daha sonra çeşitli sorgulamalar yapılabilir. İleri seviyede ise seyahat verileri üzerinde sınıflandırma, anomali tespiti, segmentasyon, öneri sistemleri vs gerçekleştirmek mümkündür. Şekil 1’de 3 farklı kullanıcıya ait trajectory verisi gosterilmistir.
 
-![Şekil 1 - Trajectory Verileri](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image1.png)
+<p align="center">
+  <img src="https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image1.png"/>
+</p>
 
 ![Uygulamaya Genel Görünüm](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image4.png)
 
@@ -17,12 +19,15 @@ Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve al
 
 > Şekil 3’te indirgeme olayı resmedilmiştir.
 
-
-![Şekil 3 - Veri İndirgeme](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image3.png)
+<p align="center">
+  <img src="https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image3.png"/>
+</p>
 
 > Örnek Veri Seti
 
-![Örnek Veri Seti](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image9.png)
+<p align="center">
+  <img src="https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image9.png"/>
+</p>
 
 İstemci ham datayı indirgenmesi icin sunucuya gonderir. “İndirgeme servisi” yoluyla indirgenen data, indirgeme oranı ve indirgeme süresi istemciye gönderilir. İndirgenen data harita üzerinde gösterilir. Ayrıca ham datanın da aynı sekilde baska bir harita üzerinde gösterimi sağlanarak birbirlerinden farkı gösterilebilir olmalıdır. Diğer bilgiler (oran, süre) istemci arayüzünde gösterilir.
 
