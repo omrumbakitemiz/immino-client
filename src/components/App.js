@@ -44,7 +44,7 @@ class App extends Component {
     const json = JSON.parse(this.state.json);
 
     // const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
-    const url = `http://localhost:8080/ramer?epsilon=${this.state.sliderValue}`;
+    const url = `http://040def28.ngrok.io/ramer?epsilon=${this.state.sliderValue}`;
 
     this.setState({
       coordinates: json,
@@ -126,7 +126,7 @@ class App extends Component {
     const { reducedCoordinates } = this.state;
 
     const { nw, se } = rectangleBounds;
-    const url = `http://localhost:8080/search?nwLat=${nw.lat}&nwLng=${nw.lng}&seLat=${se.lat}&seLng=${se.lng}`;
+    const url = `http://040def28.ngrok.io/search?nwLat=${nw.lat}&nwLng=${nw.lng}&seLat=${se.lat}&seLng=${se.lng}`;
 
     axios
       .post(url, reducedCoordinates)
