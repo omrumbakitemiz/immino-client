@@ -12,12 +12,10 @@ Haraket eden nesnelerin gerçek zamanlı olarak konum bilgilerinin tespit edilm
 
 Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve alan sorgusu yapan iki servis sağlayan bir sunucu ve bu sunucuyu kullanan bir istemci geliştirilecektir. İstemci, ham trajectory datasını sunucuya gönderecektir. Sunucu, aldığı datayı istenen servise göre işleyip sonucu istemciye gönderecektir (Şekil 2’ye bakınız).
 
-![Şekil 1 - Trajectory Verileri](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image1.png)
-
 #### İSTENENLER
 • Ham veri bir text dosyasında istemci tarafında tutulmaktadır. Ham gezinge verisi dosyadan okunup Google, Yahoo gibi harita tabanlı teknojilerden biri ile path seklinde (datasetteki ardışıl lat-long verilerini line ile birlestirme yoluyla) istemci arayüzünde gösterilir. Örneğin datasette 10 tane lat-long verisi varsa p1-p2, p2- p3,.....p9-p10 seklinde birleştirilerek Şekil3’teki gibi harita üzerinde gösterilir.
 
-![Şekil 1 - Trajectory Verileri](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image1.png)
+![Şekil 8 - Tolerans Değeri](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image8.png)
 
 Örnek Veri Seti
 
