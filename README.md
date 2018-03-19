@@ -15,7 +15,9 @@ Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve al
 #### İSTENENLER
 • Ham veri bir text dosyasında istemci tarafında tutulmaktadır. Ham gezinge verisi dosyadan okunup Google, Yahoo gibi harita tabanlı teknojilerden biri ile path seklinde (datasetteki ardışıl lat-long verilerini line ile birlestirme yoluyla) istemci arayüzünde gösterilir. Örneğin datasette 10 tane lat-long verisi varsa p1-p2, p2- p3,.....p9-p10 seklinde birleştirilerek Şekil3’teki gibi harita üzerinde gösterilir.
 
-![Şekil 8 - Tolerans Değeri](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image8.png)
+Şekil 3’te indirgeme olayı resmedilmiştir.
+
+![Şekil 3 - Veri İndirgeme](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image3.png)
 
 Örnek Veri Seti
 
@@ -25,9 +27,6 @@ Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve al
 
 ![Server & Client](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image2.png)
 
-Şekil 3’te indirgeme olayı resmedilmiştir.
-
-![Şekil 3 - Veri İndirgeme](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image3.png)
 
 İndirgeme oranı= (1 - (indirgeme sonrası veri sayısı / ham veri sayısı)) * 100
 
