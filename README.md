@@ -17,6 +17,7 @@ Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve al
 
 > Şekil 3’te indirgeme olayı resmedilmiştir.
 
+
 ![Şekil 3 - Veri İndirgeme](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image3.png)
 
 > Örnek Veri Seti
@@ -31,9 +32,9 @@ Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve al
 
 > Projede kullanılan veri indirgeme yöntemi
 
-[Ramer–Douglas–Peucker - JavaScript İmplementation](http://karthaus.nl/rdp)
+* [Ramer–Douglas–Peucker - JavaScript İmplementation](http://karthaus.nl/rdp)
 
-[Ramer–Douglas–Peucker - Wikipedia](https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm)
+* [Ramer–Douglas–Peucker - Wikipedia](https://en.wikipedia.org/wiki/Ramer–Douglas–Peucker_algorithm)
 
 ##### Sorgu
 
