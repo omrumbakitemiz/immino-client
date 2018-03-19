@@ -26,7 +26,9 @@ Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve al
 
 İstemci ham datayı indirgenmesi icin sunucuya gonderir. “İndirgeme servisi” yoluyla indirgenen data, indirgeme oranı ve indirgeme süresi istemciye gönderilir. İndirgenen data harita üzerinde gösterilir. Ayrıca ham datanın da aynı sekilde baska bir harita üzerinde gösterimi sağlanarak birbirlerinden farkı gösterilebilir olmalıdır. Diğer bilgiler (oran, süre) istemci arayüzünde gösterilir.
 
-![Server & Client](https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image2.png)
+<p align="center">
+  <img src="https://github.com/omrumbakitemiz/immino-client/blob/master/docs/images/image2.png"/>
+</p>
 
 İndirgeme oranı= (1 - (indirgeme sonrası veri sayısı / ham veri sayısı)) * 100
 
