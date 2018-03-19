@@ -37,6 +37,8 @@ class App extends Component {
     this.searchRectangle = this.searchRectangle.bind(this);
   }
 
+  url = `http://localhost:8080`;
+
   onFormSubmit(e) {
     e.preventDefault();
 
@@ -44,7 +46,7 @@ class App extends Component {
     const json = JSON.parse(this.state.json);
 
     // const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
-    const url = `http://040def28.ngrok.io/ramer?epsilon=${this.state.sliderValue}`;
+    const url = `${this.url}/ramer?epsilon=${this.state.sliderValue}`;
 
     this.setState({
       coordinates: json,
@@ -54,6 +56,22 @@ class App extends Component {
     this.makeRequest(url, json);
 
     this.toggleTextArea();
+  }
+
+  searchRectangle(rectangleBounds) {
+    const { reducedCoordinates } = this.state;
+
+    const { nw, se } = rectangleBounds;
+    const url = `${this.url}/search?nwLat=${nw.lat}&nwLng=${nw.lng}&seLat=${se.lat}&seLng=${se.lng}`;
+
+    axios
+      .post(url, reducedCoordinates)
+      .then((response) => {
+        this.setState({
+          searchResults: response.data
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   onChange(e) {
@@ -122,21 +140,7 @@ class App extends Component {
     this.clearJsonData();
   }
 
-  searchRectangle(rectangleBounds) {
-    const { reducedCoordinates } = this.state;
 
-    const { nw, se } = rectangleBounds;
-    const url = `http://040def28.ngrok.io/search?nwLat=${nw.lat}&nwLng=${nw.lng}&seLat=${se.lat}&seLng=${se.lng}`;
-
-    axios
-      .post(url, reducedCoordinates)
-      .then((response) => {
-        this.setState({
-          searchResults: response.data
-        });
-      })
-      .catch(error => console.log(error));
-  }
 
   render() {
     let mapShowCondition = this.state.showMap && this.state.reducedCoordinates && this.state.sliderValue;
