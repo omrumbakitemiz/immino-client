@@ -37,7 +37,7 @@ class App extends Component {
     this.searchRectangle = this.searchRectangle.bind(this);
   }
 
-  url = `http://localhost:8080`;
+  url = `https://immino-server.herokuapp.com`;
 
   onFormSubmit(e) {
     e.preventDefault();
@@ -46,14 +46,14 @@ class App extends Component {
     const json = JSON.parse(this.state.json);
 
     // const url = `https://immino-server.herokuapp.com/ramer?epsilon=${this.state.sliderValue}`;
-    const url = `${this.url}/ramer?epsilon=${this.state.sliderValue}`;
+    // const url = `${this.url}/ramer?epsilon=${this.state.sliderValue}`;
 
     this.setState({
       coordinates: json,
       sliderLock: true
     });
 
-    this.makeRequest(url, json);
+    this.makeRequest(this.url, json);
 
     this.toggleTextArea();
   }
