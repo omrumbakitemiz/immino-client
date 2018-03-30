@@ -14,8 +14,6 @@ Haraket eden nesnelerin gerçek zamanlı olarak konum bilgilerinin tespit edilme
   <img src="https://github.com/omrumbakitemiz/immino-client/raw/master/docs/images/image1.png"/>
 </p>
 
-![Uygulamaya Genel Görünüm](https://github.com/omrumbakitemiz/immino-client/raw/master/docs/images/image4.png)
-
 Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve alan sorgusu yapan iki servis sağlayan bir sunucu ve bu sunucuyu kullanan bir istemci geliştirilecektir. İstemci, ham trajectory datasını sunucuya gönderecektir. Sunucu, aldığı datayı istenen servise göre işleyip sonucu istemciye gönderecektir (Şekil 2’ye bakınız).
 
 #### İSTENENLER
