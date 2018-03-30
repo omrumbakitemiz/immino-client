@@ -1,6 +1,8 @@
-<h1 style="text-align: center; line-height: 1.6">immino <br /> Gezinge (Trajectory) Verisi İşleme</h1>
+<h1 style="text-align: center; line-height: 1.6">immino - Gezinge (Trajectory) Verisi İşleme</h1>
 
-### Dağıtık Hesaplama Yöntemleri ile Uygulama Geliştirme
+https://omrumbakitemiz.github.io/immino-client/
+
+<h3 style="text-align: center; line-height: 1.6">Dağıtık Hesaplama Yöntemleri ile Uygulama Geliştirme</h3>
 
 ![Uygulama Ana Ekranı](https://github.com/omrumbakitemiz/immino-client/raw/master/docs/images/image4.png)
 
@@ -10,8 +12,6 @@ Haraket eden nesnelerin gerçek zamanlı olarak konum bilgilerinin tespit edilme
 <p align="center">
   <img src="https://github.com/omrumbakitemiz/immino-client/raw/master/docs/images/image1.png"/>
 </p>
-
-![Uygulamaya Genel Görünüm](https://github.com/omrumbakitemiz/immino-client/raw/master/docs/images/image4.png)
 
 Bu projede, ham trajectory verileri üzerinde veri indirgeme ön işlemi ve alan sorgusu yapan iki servis sağlayan bir sunucu ve bu sunucuyu kullanan bir istemci geliştirilecektir. İstemci, ham trajectory datasını sunucuya gönderecektir. Sunucu, aldığı datayı istenen servise göre işleyip sonucu istemciye gönderecektir (Şekil 2’ye bakınız).
 
