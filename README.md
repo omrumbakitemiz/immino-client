@@ -1,5 +1,4 @@
-<h1>immino</h1>
-<h2>Gezinge (Trajectory) Verisi İşleme</h2>
+<h1 style="text-align: center; line-height: 1.6">immino <br /> Gezinge (Trajectory) Verisi İşleme</h1>
 
 ### Dağıtık Hesaplama Yöntemleri ile Uygulama Geliştirme
 
